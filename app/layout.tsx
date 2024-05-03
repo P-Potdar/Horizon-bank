@@ -1,26 +1,35 @@
 import type { Metadata } from "next";
-import { Inter,IBM_Plex_Serif } from "next/font/google";
+import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"],variable:'--font-inter'});
-const ibmplexserief=IBM_Plex_Serif({
-  subsets:['latin'],
-  weight:['400','700'],
-  variable:'--font--ibm-plex-serif'
-})
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const ibmplexSerif = IBM_Plex_Serif({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font--ibm-plex-serif'
+});
+
 export const metadata: Metadata = {
   title: "Horizon",
-  description: "Horizon is a morden banking platform for everyone",
+  description: "Horizon is a modern banking platform for everyone",
+  icons: {
+    icon: '/icons/logo.svg'
+  }
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Import font styles here for better separation of concerns */}
+        <style>{`
+          body {
+            ${inter.className}
+            ${ibmplexSerif.className}
+          }
+        `}</style>
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
